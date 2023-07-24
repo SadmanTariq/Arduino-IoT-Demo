@@ -1,7 +1,6 @@
 const { logger } = require("firebase-functions");
 const { onRequest, onCall } = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
-const { log } = require("firebase-functions/logger");
 
 admin.initializeApp();
 
@@ -41,20 +40,6 @@ exports.resetDb = onCall(async (request) => {
 
     return { result: "done" };
 });
-// exports.getPinsFlag = onRequest(async (request, response) => {
-//     let flag = 0; // 32-bit integer, each bit represents a pin with pin 0 being the least significant bit
-//     const snapshot = await db.ref("/pins").once('value');
-//     snapshot.forEach((pin) => {
-//         // logger.log(pin.key, pin.val());
-//         logger.info("pin.key =", pin.key, "pin.val() =", pin.val());
-//         let bit = parseInt(pin.val()) * Math.pow(2, parseInt(pin.key));
-//         logger.log("bit =", bit);
-//         flag = flag | (pin.val() * Math.pow(2, parseInt(pin.key))); // 2^(pin.key)
-//         logger.log("flag =", flag);
-//     });
-
-//     response.send(flag.toString());
-// });
 
 function setCharAt(str, index, chr) {
     if (index > str.length - 1) return str;
@@ -67,18 +52,18 @@ exports.getPinsFlag = onRequest(async (request, response) => {
 
     const snapshot = await db.ref("/pins").once("value");
     snapshot.forEach((pin) => {
-        logger.log(pin.key, pin.val());
         if (pin.key < 0 || pin.key > 15) {
             logger.error("pin.key =", pin.key, "is out of range");
             response.status(500).send("pin.key out of range");
             return;
         }
 
-        if (pin.val() > 0) {  // TODO: WHY THE FUCK IS THIS NOT WORKING???
+        if (pin.val().value === 1) {
             flag = setCharAt(flag, 16 - pin.key, "1");
         }
-
-        logger.info(flag, parseInt(flag, 2));
     });
-    response.status(200).send(parseInt(flag, 2).toString());
+
+    let base64Flag = atob(parseInt(flag, 2));
+    logger.info("Flag =", flag, base64Flag);
+    response.status(200).send(base64Flag);
 });
