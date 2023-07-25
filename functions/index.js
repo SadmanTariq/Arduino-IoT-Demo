@@ -63,7 +63,7 @@ exports.getPinsFlag = onRequest(async (request, response) => {
         }
     });
 
-    let base64Flag = atob(parseInt(flag, 2));
-    logger.info("Flag =", flag, base64Flag);
-    response.status(200).send(base64Flag);
+    let flagInt = parseInt(flag, 2);
+    logger.info("Flag =", flag, flagInt);
+    response.status(200).send(flagInt.toString());
 });
