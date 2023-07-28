@@ -7,11 +7,24 @@
 #define LPG_PIN A6
 #define SEALEVELPRESSURE_HPA (1013.25)
 
+#define POTENTIOMETER_VCC A0
+#define POTENTIOMETER_GND A2
+#define POTENTIOMETER_S A1
+
 SensorData sensorData;
 Adafruit_BME680 bme;
 
 void initialiseSensors()
 {
+    pinMode(POTENTIOMETER_VCC, OUTPUT);
+    pinMode(POTENTIOMETER_GND, OUTPUT);
+    pinMode(POTENTIOMETER_S, INPUT);
+
+    digitalWrite(POTENTIOMETER_VCC, HIGH);
+    digitalWrite(POTENTIOMETER_GND, LOW);
+
+    pinMode(LPG_PIN, INPUT);
+
     bme.begin(0x76);
 
     if (!bme.begin(0x76))
@@ -43,6 +56,7 @@ void updateSensors()
     sensorData.altitude = bme.readAltitude(SEALEVELPRESSURE_HPA);
     sensorData.gasResistance = bme.gas_resistance;
     sensorData.lpgContent = analogRead(LPG_PIN);
+    sensorData.potentiometer = analogRead(POTENTIOMETER_S);
 }
 
 SensorData *getSensorData()

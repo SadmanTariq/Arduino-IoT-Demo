@@ -22,6 +22,9 @@ struct SensorData
 
     /// @brief LPG content, 0 to 1023.
     uint16_t lpgContent;
+
+    /// @brief Potentiometer value, 0 to 1023.
+    uint16_t potentiometer;
 };
 
 
