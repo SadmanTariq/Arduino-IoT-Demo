@@ -87,7 +87,7 @@ const btnLed3Blue = document.getElementById("btn-led3-blue");
 
 const pinMap = {
     led1: 6,
-    led2: 7,
+    led2: 5,
     led3Gnd: 10,
     led3Red: 11,
     led3Green: 9,
