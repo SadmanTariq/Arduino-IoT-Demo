@@ -3,64 +3,74 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arduino IoT Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 
 <body>
+    <div class="my-5 container-md text-center">
+        <div class="row align-items-center gy-3">
+            <!-- <div class="col col-md-3"> -->
+            <!-- <div class="row align-items-center"> -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Logo_of_Swinburne_University_of_Technology.svg"
+                alt="Swinburne Logo" class="img-fluid col col-md-3">
+            <img src="https://www.arduino.cc/en/uploads/Trademark/ArduinoCommunityLogo.png" alt="Arduino Logo"
+                class="img-fluid col col-md-3">
+            <!-- </div>
+            </div> -->
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-block d-md-none"></div>
+
+            <h1 class="col">Arduino IoT Demo</h1>
+        </div>
+    </div>
+    <div class="my-5 pb-3 container-md border-bottom border-primary">
+        <div class="row">
+            <h3>LED Control</h3>
+        </div>
+        <div class="my-1 row justify-content-start align-items-start">
+            <div class="d-grid gap-2 d-md-block">
+                <button id="btn-led1" type="button" class="btn btn-primary" data-bs-toggle="button" aria-pressed="false"
+                    autocomplete="off">LED 1</button>
+                <button id="btn-led2" type="button" class="btn btn-primary" data-bs-toggle="button" aria-pressed="false"
+                    autocomplete="off">LED 2</button>
+            </div>
+        </div>
+        <div class="my-1 row justify-content-start align-items-start g-2">
+            <div class="d-grid gap-2 d-md-block mt-3 mt-md-0">
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                    <button id="btn-led3-toggle" type="button" class="btn btn-primary" data-bs-toggle="button"
+                        aria-pressed="false" autocomplete="off">LED 3</button>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                    <button id="btn-led3-red" type="button" class="btn btn-outline-danger" data-bs-toggle="button" aria-pressed="false"
+                    autocomplete="off">Red</button>
+                    <button id="btn-led3-green" type="button" class="btn btn-outline-success" data-bs-toggle="button" aria-pressed="false"
+                    autocomplete="off">Green</button>
+                    <button id="btn-led3-blue" type="button" class="btn btn-outline-info" data-bs-toggle="button" aria-pressed="false"
+                    autocomplete="off">Blue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my-5 pb-3 container-md border-bottom border-primary">
+        <div class="row">
+            <h3>Sensors</h3>
+        </div>
+        <p class="mx-auto my-auto">Temperature: <em id="temp-value">24.5</em>°C</p>
+        <p class="mx-auto my-auto">Pressure: <em id="pressure-value">1018.5</em> hPa</p>
+        <p class="mx-auto my-auto">Humidity: <em id="humidity-value">52.1</em>%</p>
+        <p class="mx-auto my-auto">Gas Resistance: <em id="gasresistance-value">52.1</em> kOhm</p>
+        <p class="mx-auto my-auto">LPG Content: <em id="lpgcontent-value">32</em></p>
+    </div>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
     <script type="module" src="index.js"></script>
-    <ul id="buttons">
-        <li id="reset">
-            <button id="btn-reset" class="pinToggle">Reset</button>
-        </li>
-        <li id="pin-2">
-            <button id="btn-pin-2" class="pinToggle">D2</button>
-            <em id="pin-2-status">ON</a>
-        </li>
-        <li id="pin-3">
-            <button id="btn-pin-3" class="pinToggle">D3</button>
-            <em id="pin-3-status">ON</a>
-        </li>
-        <li id="pin-4">
-            <button id="btn-pin-4" class="pinToggle">D4</button>
-            <em id="pin-4-status">ON</a>
-        </li>
-        <li id="pin-5">
-            <button id="btn-pin-5" class="pinToggle">D5</button>
-            <em id="pin-5-status">ON</a>
-        </li>
-        <li id="pin-6">
-            <button id="btn-pin-6" class="pinToggle">D6</button>
-            <em id="pin-6-status">ON</a>
-        </li>
-        <li id="pin-7">
-            <button id="btn-pin-7" class="pinToggle">D7</button>
-            <em id="pin-7-status">ON</a>
-        </li>
-        <li id="pin-8">
-            <button id="btn-pin-8" class="pinToggle">D8</button>
-            <em id="pin-8-status">ON</a>
-        </li>
-        <li id="pin-9">
-            <button id="btn-pin-9" class="pinToggle">D9</button>
-            <em id="pin-9-status">ON</a>
-        </li>
-        <li id="pin-10">
-            <button id="btn-pin-10" class="pinToggle">D10</button>
-            <em id="pin-10-status">ON</a>
-        </li>
-        <li id="pin-11">
-            <button id="btn-pin-11" class="pinToggle">D11</button>
-            <em id="pin-11-status">ON</a>
-        </li>
-        <li id="pin-12">
-            <button id="btn-pin-12" class="pinToggle">D12</button>
-            <em id="pin-12-status">ON</a>
-        </li>
-        <li id="pin-13">
-            <button id="btn-pin-13" class="pinToggle">D13</button>
-            <em id="pin-13-status">ON</a>
-        </li>
-        </ol>
 </body>
 
 </html>
